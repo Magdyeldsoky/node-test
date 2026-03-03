@@ -1,25 +1,22 @@
 import express from "express";
-import router from "./routs/useroute.js";
-import routercar from "./routs/carsrout.js";
 import mongoose from "mongoose";
+import cors from "cors";
+// server.js
+import authRoutes from "./routes/auth.js";
+import carRoutes from "./routes/cars.js";
+
+const app = express();
+app.use(cors());
+app.use(express.json());
 
 mongoose
   .connect(
     "mongodb+srv://magdy_eldsoky:123456789Magdy@cluster0.gzdtpgy.mongodb.net/?appName=Cluster0",
   )
-  .then(() => console.log("Connected to MongoDB"))
-  .catch((err) => console.error("Could not connect to MongoDB", err));
+  .then(() => console.log("MongoDB Connected"))
+  .catch((err) => console.error(err));
 
-const app = express();
-const port = 3000;
+app.use("/", authRoutes); // /login and /signup
+app.use("/cars", carRoutes);
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
-
-app.use("/cars", routercar);
-app.use("/user", router);
-
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
+app.listen(3000, () => console.log("Server running on port 3000"));

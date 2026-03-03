@@ -1,8 +1,10 @@
 import mongoose from "mongoose";
-const Schema = mongoose.Schema;
+const { Schema, model } = mongoose;
 
-const userSchema = new Schema({
-  name: String,
-  email: String,
-  password: String,
+const carSchema = new Schema({
+  name: { type: String, required: true },
+  model: { type: String, required: true },
+  year: { type: Number, required: true },
 });
+
+export default model("Car", carSchema);
