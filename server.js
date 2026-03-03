@@ -1,8 +1,8 @@
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
-import authRoutes from "./routes/auth.js";
-import carRoutes from "./routes/cars.js";
+import authRoutes from "./routes/auth.js"
+import carRoutes from "./routes/cars.js"
 
 const app = express();
 app.use(cors());
