@@ -8,10 +8,10 @@ const router = express.Router();
 router.post("/signup", async (req, res) => {
   const { username, password } = req.body;
   try {
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({ username, password: hashedPassword });
-    await newUser.save();
-    res.status(201).json({ message: "User created successfully" });
+    const hashed = await bcrypt.hash(password, 10);
+    const user = new User({ username, password: hashed });
+    await user.save();
+    res.status(201).json({ message: "Account created successfully" });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
@@ -27,7 +27,7 @@ router.post("/login", async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ message: "Invalid password" });
 
-    res.json({ message: "Login successful" }); // لاحقًا يمكن إضافة JWT
+    res.json({ message: "Login successful" });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

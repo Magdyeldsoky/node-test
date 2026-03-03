@@ -1,7 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
-// server.js
 import authRoutes from "./routes/auth.js";
 import carRoutes from "./routes/cars.js";
 
@@ -16,7 +15,7 @@ mongoose
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.error(err));
 
-app.use("/", authRoutes); // /login and /signup
+app.use("/", authRoutes);
 app.use("/cars", carRoutes);
 
 app.listen(3000, () => console.log("Server running on port 3000"));
